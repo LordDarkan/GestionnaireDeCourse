@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GestionnaireDeCourse.data;
+using GestionnaireDeCourse.Model;
 
 namespace GestionnaireDeCourse
 {
@@ -20,9 +22,20 @@ namespace GestionnaireDeCourse
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         public MainWindow()
         {
             InitializeComponent();
+            using (var db = new Context())
+            {
+                var query = from b in db.Chauffeurs
+                    select b;
+                foreach (Chauffeur chauffeur in query)
+                {
+                    Label1.Content = chauffeur.Nom;
+                }
+            }
         }
     }
 }

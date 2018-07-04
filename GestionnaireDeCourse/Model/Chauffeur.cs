@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,14 @@ namespace GestionnaireDeCourse.Model
 {
     public class Chauffeur : IComparable<Chauffeur>
     {
-        public long Id { get; set; }
+        [Key]
+        public long ChauffeurId { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string NumTel { get; set; }
         public string Adresse { get; set; }
+
+        public virtual List<Course> Courses { get; set; }
 
 
         public int CompareTo(Chauffeur other)
@@ -29,7 +33,7 @@ namespace GestionnaireDeCourse.Model
         {
             return new Chauffeur
             {
-                Id = Id,
+                ChauffeurId = ChauffeurId,
                 Nom = Nom,
                 Prenom = Prenom,
                 NumTel = NumTel,
